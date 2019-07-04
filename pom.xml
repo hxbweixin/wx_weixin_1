@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.hxbweixin</groupId>
+  <artifactId>weixin_1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <!-- 继承Spring Boot的父项目，里面包含了一系列的依赖包管理，后面可以不写包的版本号，通过父项目来统一管理版本号 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	
+	<properties>
+		<!-- 基于Spring Boot项目可以使用java.version来指定JDK的版本号，可选的：1.8、9、10、11 -->
+		<!-- 11是目前最新的稳定版，下一个稳定版2年后发布 -->
+		<java.version>11</java.version>
+		<!-- 源代码的字符编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 报告文件的字符编码 -->
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	
+	
+	<modules>
+		<module>weixin</module>
+		<module>subscribe</module>
+		<module>commons</module>
+	</modules>
+</project>
