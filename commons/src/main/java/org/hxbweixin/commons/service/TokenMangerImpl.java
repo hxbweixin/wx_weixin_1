@@ -1,4 +1,4 @@
-package org.hxbweixin.weixin.service;
+package org.hxbweixin.commons.service;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -14,6 +14,8 @@ import org.hxbweixin.commons.domain.ResponseToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +26,24 @@ public class TokenMangerImpl implements TokenManager{
 	private static final Logger LOG = LoggerFactory.getLogger(TokenMangerImpl.class);
 	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
+	private RedisTemplate<String,ResponseToken> tokenRedisTemplate;
 	
-	
+	@Override
 	public String getToken(String account) {
+		// TODO Auto-generated method stub
+		BoundValueOperations<String,ResponseToken> ops=tokenRedisTemplate.boundValueOps("weixin_access_token");
+		ResponseToken token=ops.get();
+		if(token ==null) {
+			//增加事务锁
+			Boolean locked=tokenRedisTemplate.opsForValue()
+					.setIfAbsent("weixin_access_token_lock", new ResponseToken());
+		}
+		return null;
+	}
+	
+	
+	public String getRemoToken(String account) {
 		
 		String appid="wx7329e75102933645";
 		String appsecret="9d84d90c90229c8d772f7fed4ae761bb";

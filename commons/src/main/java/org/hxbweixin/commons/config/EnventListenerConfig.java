@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hxbweixin.commons.domain.InMessage;
+import org.hxbweixin.commons.domain.ResponseToken;
 import org.hxbweixin.commons.domain.event.EventInMessage;
 import org.hxbweixin.commons.service.JsonRedisSerializer;
 import org.springframework.beans.factory.DisposableBean;
@@ -53,6 +54,18 @@ public interface EnventListenerConfig extends
 	public default RedisTemplate<String,InMessage> inMessageTemplate(
 			@Autowired RedisConnectionFactory redisConnectionFactory){
 		RedisTemplate<String,InMessage> template=new RedisTemplate<>();
+		template.setConnectionFactory(redisConnectionFactory);
+	
+//		template.setKeySerializer(new StringRedisSerialzer());
+		template.setValueSerializer(new JsonRedisSerializer());
+		
+		return template;
+	}
+	
+	@Bean
+	public default RedisTemplate<String,ResponseToken> tokenRedisTemplate(
+			@Autowired RedisConnectionFactory redisConnectionFactory){
+		RedisTemplate<String,ResponseToken> template=new RedisTemplate<>();
 		template.setConnectionFactory(redisConnectionFactory);
 	
 //		template.setKeySerializer(new StringRedisSerialzer());

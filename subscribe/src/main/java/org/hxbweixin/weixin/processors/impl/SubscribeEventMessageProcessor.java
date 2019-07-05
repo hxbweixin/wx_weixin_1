@@ -4,7 +4,6 @@ import org.hxbweixin.commons.domain.User;
 import org.hxbweixin.commons.domain.event.EventInMessage;
 import org.hxbweixin.commons.processors.EventMessageProcessor;
 import org.hxbweixin.commons.repository.UserRepository;
-import org.hxbweixin.weixin.service.TokenManager;
 import org.hxbweixin.weixin.service.WeixinProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
