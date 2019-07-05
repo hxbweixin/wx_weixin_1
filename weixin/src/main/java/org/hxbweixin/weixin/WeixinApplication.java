@@ -14,7 +14,8 @@ public class WeixinApplication {
 	
 	@Bean
 	public RedisTemplate<String,InMessage> inMessageTemplate(
-			@Autowired RedisConnectionFactory redisConnectionFactory){
+		@Autowired 
+		RedisConnectionFactory redisConnectionFactory){
 		RedisTemplate<String,InMessage> template=new RedisTemplate<>();
 		template.setConnectionFactory(redisConnectionFactory);
 	

@@ -67,7 +67,7 @@ public class MessageReceiverController {
 		LOG.debug("转换得到的消息对象 \n{}\n", inMessage.toString());
 
 		// 使用默认的序列化程序来实现序列化
-		inMessageTemplate.convertAndSend("kemao_1_" + inMessage.getMsgType(), inMessage);
+		inMessageTemplate.convertAndSend("weixin_1_" + inMessage.getMsgType(), inMessage);
 
 //		// 把消息放入消息队列
 //		inMessageTemplate.execute(new RedisCallback<String>() {
@@ -81,7 +81,7 @@ public class MessageReceiverController {
 //					// 比如文本消息、图片消息处理方式不同，所以使用前缀来隔离： text* 表示文本消息、image* 表示图片消息。
 //					// 建议在多人共享一个服务器的时候，每个人使用不同的数据库实例即可，并且建议在通道名称之前加上反向代理的前缀。
 //
-//					String channel = "kemao_1_" + inMessage.getMsgType();
+//					String channel = "weixin_1_" + inMessage.getMsgType();
 //
 //					// 消息内容要自己序列化才能放入队列中
 //					ByteArrayOutputStream out = new ByteArrayOutputStream();// 输出流
