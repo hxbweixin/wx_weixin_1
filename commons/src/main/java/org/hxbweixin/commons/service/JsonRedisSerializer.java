@@ -25,7 +25,7 @@ public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<Object> {
 	public byte[] serialize(Object t) throws SerializationException {
 		// 我们现在希望把对象序列化成JSON字符串，但是JSON字符串本身不确定对象的类型，所以需要扩展：
 		// 序列化的时候先把类名的长度写出去，再写出类名，最后再来写JSON字符串。
-
+		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();// 把数据输出到一个字节数组
 		DataOutputStream out = new DataOutputStream(baos);// 把输出流封装成数据输出流
 		try {
@@ -50,7 +50,12 @@ public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<Object> {
 
 	// 在反序列化的时候被调用的方法，负责把字节数组转换为InMessage
 	@Override
-	public InMessage deserialize(byte[] bytes) throws SerializationException {
+	public Object  deserialize(byte[] bytes) throws SerializationException {
+		
+		if(bytes == null ||bytes.length == 0) {
+			return null;
+		}
+
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 		DataInputStream in = new DataInputStream(bais);
@@ -64,8 +69,7 @@ public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<Object> {
 			// 把读取到的字节数组，转换为类名
 			String className = new String(classNameBytes, "UTF-8");
 			// 通过类名，加载类对象
-			@SuppressWarnings("unchecked")
-			Class<? extends InMessage> cla =(Class<? extends InMessage>) Class.forName(className);
+			Class<?> cla =(Class<?>) Class.forName(className);
 
 			// length + 4 : 表示类名的长度和int的长度，一个int占4个字节
 			return this.objectMapper.readValue(Arrays.copyOfRange(bytes, length + 4, bytes.length), cla);
