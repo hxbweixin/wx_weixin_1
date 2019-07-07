@@ -18,7 +18,7 @@ public class TokenManagerTests {
 	private TokenManager tokenManager;
 	
 	@Test
-	private void test() throws InterruptedException{
+	public void test() throws InterruptedException{
 		Runnable task= ()->{
 			String token =tokenManager.getToken(null);
 			System.out.println("获取到的令牌："+token);

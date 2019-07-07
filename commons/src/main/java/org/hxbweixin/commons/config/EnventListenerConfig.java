@@ -75,7 +75,8 @@ public interface EnventListenerConfig extends
 	}
 	
 	@Bean
-	public default MessageListenerAdapter messageListener(@Autowired RedisTemplate<String,InMessage> inMessageTemplate) {
+	public default MessageListenerAdapter messageListener(
+			@Autowired RedisTemplate<String,InMessage> inMessageTemplate) {
 		MessageListenerAdapter adapter=new MessageListenerAdapter();
 		adapter.setSerializer(inMessageTemplate.getValueSerializer());
 		

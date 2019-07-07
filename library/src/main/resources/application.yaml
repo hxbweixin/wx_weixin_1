@@ -5,11 +5,14 @@ spring:
       username: weixin
       password: 1234
    jpa: 
-      show-sql: true
-      generate-ddl: true  
+      generate-ddl: true
+      properties:
+         # 设置一个方言，用于自动加上MySQL的引擎名称，默认MyISAM不支持事务，不推荐使用。
+         hibernate.dialect: org.hibernate.dialect.MySQL57Dialect 
    #配置Redis的连接信息
    redis: 
        host: 120.77.252.210
        port: 6379
-       database: 5    
+       database: 5  
        
+server.port: 8093

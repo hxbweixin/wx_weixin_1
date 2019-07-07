@@ -55,7 +55,7 @@ public class TokenMangerImpl implements TokenManager{
 							ops.getAndSet(token);
 							ops.expire(token.getExpiresIn() - 60, TimeUnit.SECONDS);
 						}else {
-							LOG.trace("再次检查零牌，已经有令牌再Redis里面，直接使用");
+							LOG.trace("再次检查零牌，已经有令牌在Redis里面，直接使用");
 						}
 						break;
 					}finally {
